@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #f4f1ea;
+      }
+      .stage {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          radial-gradient(ellipse 62% 78% at 50% 42%, #e7f3f0 0%, rgba(231, 243, 240, 0) 70%),
+          #f4f1ea;
+      }
+      .lockup {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 36px;
+      }
+      .mark {
+        width: 148px;
+        height: 148px;
+        display: block;
+      }
+      h1 {
+        margin: 0;
+        font-family: "Liberation Serif", "DejaVu Serif", serif;
+        font-weight: 400;
+        font-size: 168px;
+        letter-spacing: 0.04em;
+        line-height: 0.85;
+        color: #10211d;
+        white-space: nowrap;
+      }
+      p {
+        margin: 22px 0 0;
+        font-family: "Liberation Sans", "DejaVu Sans", sans-serif;
+        font-size: 22px;
+        font-weight: 400;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #5e6a64;
+        white-space: nowrap;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="lockup">
+        <svg class="mark" viewBox="0 0 32 32" role="img" aria-label="Pipecove">
+          <rect width="32" height="32" rx="8" fill="#10211D" />
+          <path
+            d="M7.5 11h8.2c4.8 0 8.3 3.2 8.3 7.5 0 3.7-2.7 6.3-6.5 6.3H13"
+            fill="none"
+            stroke="#0F6E64"
+            stroke-width="3.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <div>
+          <h1 id="title">Pipecove</h1>
+          <p id="tag">Contacts, pipeline, follow-up</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

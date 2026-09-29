@@ -1,1 +1,0 @@
-# pipecove-frontend

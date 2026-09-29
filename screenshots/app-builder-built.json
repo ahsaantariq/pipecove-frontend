@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Pipecove — the client desk",
+      "hasCanvas": false,
+      "bodyTextLen": 4410,
+      "bodyTextHash": "a487ccc3c3cc432180d5fe9e68fa9fb383a739c1b776f8420d4d5ff7f63670d7",
+      "bodyTextPrefix": "Pipecove Product Pricing Security Partners Sign in Open the app ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Pipecove — the client desk",
+      "hasCanvas": false,
+      "bodyTextLen": 4278,
+      "bodyTextHash": "7c3017c6b78385f94d2296ac4e0602a8050e3aced8a5000ccfe8d0c8f5516706",
+      "bodyTextPrefix": "Pipecove CRM FOR THE FOLLOW-UP The whole client relationship, on",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
