@@ -1,0 +1,40 @@
+# Pipecove
+
+> Pipecove is a web CRM for follow-up. Contacts, pipelines, email, SMS, voice calls, WhatsApp, Facebook Messenger, and Instagram direct messages live on one contact record. The marketing site is https://pipecove.com. The product is https://app.pipecove.com.
+
+Pipecove is operated by Pipecove. It runs on a virtual private server the company administers, stores data in PostgreSQL, and sends its own product email from a Mailcow server it operates. Card payments use Stripe. SMS, voice, and WhatsApp numbers use Twilio. Messenger and Instagram use Meta, and only after a workspace connects its own Facebook Page and Instagram professional account.
+
+Phone numbers for SMS, calling, and WhatsApp can be purchased for Australia and the United Kingdom only. More countries are not available yet. Before a number is sold, the workspace submits the identity and address details Twilio requires for that country. Pipecove forwards those details to Twilio. Twilio approves or rejects them.
+
+## Plans (USD, monthly, tax extra)
+
+- Free: $0 forever. 1 seat, 1 workspace, 100 contacts, 25 opportunities, 1 pipeline, 1 automation, email inbox, templates, two-factor sign-in. No card. It does not convert into a paid plan.
+- Solo: $19 per month. 1 seat, 2,000 contacts, unlimited opportunities, 3 pipelines, 5 automations, custom fields, calendar, booking, public API, SMS, voice, and AU/UK numbers.
+- Growth: $49 per month. 5 seats, 10,000 contacts, unlimited pipelines, 25 automations, plus WhatsApp, Facebook Messenger, Instagram DMs, custom objects, and agents and roles.
+- Agency: $99 per month. 15 seats, 3 workspaces, unlimited contacts and automations, plus everything in Growth.
+
+SMS, voice, WhatsApp usage, and number rental are prepaid from a usage wallet. They are not included in the monthly price. Messenger and Instagram are included on Growth and Agency.
+
+## Partners
+
+A partner earns 60% of the first subscription payment from a workspace that signs up with their link, then 20% of later subscription payments from that same workspace for 12 months. Wallet top-ups, usage, number rental, tax, and refunds are excluded. Self-referrals are excluded.
+
+## Policies
+
+- [Terms of Service](https://pipecove.com/legal/terms)
+- [Privacy Policy](https://pipecove.com/legal/privacy)
+- [Cookie Policy](https://pipecove.com/legal/cookies)
+- [Refund and cancellation](https://pipecove.com/legal/refunds)
+- [Acceptable use and messaging](https://pipecove.com/legal/acceptable-use)
+- [Data processing addendum](https://pipecove.com/legal/dpa)
+- [Partner program terms](https://pipecove.com/legal/partners)
+
+## Pages
+
+- [Home](https://pipecove.com/): product overview
+- [Product](https://pipecove.com/features): feature-by-feature description
+- [Pricing](https://pipecove.com/pricing): plans, limits, comparison, number rules, FAQs
+- [Security](https://pipecove.com/security): access controls and infrastructure
+- [Partners](https://pipecove.com/partners): commission and the worked example
+
+Pipecove does not sell personal information. Google API data, if a workspace connects Google Calendar, is used only for that feature and under Google's Limited Use requirements. Meta platform data is used only to show and send the connected inbox.

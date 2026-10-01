@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 type Block =
   | { type: "h1" | "h2" | "h3" | "p"; text: string }
   | { type: "ul"; items: string[] };
@@ -57,18 +59,38 @@ function parsePolicy(markdown: string): Block[] {
 }
 
 function Inline({ text }: { text: string }) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
   return (
     <>
-      {parts.map((part, index) =>
-        part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={index} className="font-semibold text-foreground">
-            {part.slice(2, -2)}
-          </strong>
-        ) : (
-          <span key={index}>{part}</span>
-        ),
-      )}
+      {parts.map((part, index) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return (
+            <strong key={index} className="font-semibold text-foreground">
+              {part.slice(2, -2)}
+            </strong>
+          );
+        }
+        const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (link) {
+          const [, label, href] = link;
+          if (href.startsWith("/")) {
+            const slug = href.match(/^\/legal\/([^/]+)$/)?.[1];
+            if (slug) {
+              return (
+                <Link key={index} to="/legal/$slug" params={{ slug }} className="font-medium text-primary">
+                  {label}
+                </Link>
+              );
+            }
+          }
+          return (
+            <a key={index} href={href} className="font-medium text-primary">
+              {label}
+            </a>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
     </>
   );
 }

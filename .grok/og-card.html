@@ -1,81 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      html,
-      body {
-        margin: 0;
-        width: 1200px;
-        height: 630px;
-        overflow: hidden;
-        background: #f4f1ea;
-      }
-      .stage {
-        position: relative;
-        width: 1200px;
-        height: 630px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background:
-          radial-gradient(ellipse 62% 78% at 50% 42%, #e7f3f0 0%, rgba(231, 243, 240, 0) 70%),
-          #f4f1ea;
-      }
-      .lockup {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 36px;
-      }
-      .mark {
-        width: 148px;
-        height: 148px;
-        display: block;
-      }
-      h1 {
-        margin: 0;
-        font-family: "Liberation Serif", "DejaVu Serif", serif;
-        font-weight: 400;
-        font-size: 168px;
-        letter-spacing: 0.04em;
-        line-height: 0.85;
-        color: #10211d;
-        white-space: nowrap;
-      }
-      p {
-        margin: 22px 0 0;
-        font-family: "Liberation Sans", "DejaVu Sans", sans-serif;
-        font-size: 22px;
-        font-weight: 400;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: #5e6a64;
-        white-space: nowrap;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="stage">
-      <div class="lockup">
-        <svg class="mark" viewBox="0 0 32 32" role="img" aria-label="Pipecove">
-          <rect width="32" height="32" rx="8" fill="#10211D" />
-          <path
-            d="M7.5 11h8.2c4.8 0 8.3 3.2 8.3 7.5 0 3.7-2.7 6.3-6.5 6.3H13"
-            fill="none"
-            stroke="#0F6E64"
-            stroke-width="3.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        <div>
-          <h1 id="title">Pipecove</h1>
-          <p id="tag">Contacts, pipeline, follow-up</p>
-        </div>
-      </div>
-    </div>
-  </body>
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face {
+    font-family: "Newsreader";
+    src: url("file:///workspace/node_modules/@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: block;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("file:///workspace/node_modules/@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2") format("woff2");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: block;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    width: 1200px;
+    height: 630px;
+    background: #F4F1EA;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .frame {
+    position: absolute;
+    inset: 28px;
+    border: 1px solid #E3DDD2;
+    border-radius: 28px;
+    pointer-events: none;
+  }
+  .lockup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 860px;
+  }
+  h1 {
+    margin: 32px 0 0;
+    padding: 0;
+    font-family: "Newsreader", "Iowan Old Style", Palatino, serif;
+    font-weight: 520;
+    font-size: 168px;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    color: #10211D;
+  }
+  p {
+    margin: 20px 0 0;
+    padding: 0;
+    font-family: "Outfit", ui-sans-serif, sans-serif;
+    font-weight: 450;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: #0F6E64;
+  }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="lockup">
+    <svg width="136" height="136" viewBox="0 0 32 32" aria-hidden="true">
+      <rect width="32" height="32" rx="8" fill="#10211D"/>
+      <path
+        d="M7.2 11.2h8.4c4.7 0 8.2 3.3 8.2 7.6 0 3.6-2.6 6.2-6.4 6.2H13"
+        fill="none"
+        stroke="#2DD4BF"
+        stroke-width="3.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <h1>Pipecove</h1>
+    <p>One cove for every conversation.</p>
+  </div>
+</body>
 </html>

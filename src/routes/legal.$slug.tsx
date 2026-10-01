@@ -2,16 +2,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PolicyBody } from "@/components/site/policy-body";
 import { Shell } from "@/components/site/shell";
 import { POLICY_DEFAULTS, policyDefault } from "@/content/policies";
+import { JsonLd, breadcrumbLd, canonical } from "@/lib/seo";
+import { SITE_ORIGIN } from "@/lib/site";
 
 export const Route = createFileRoute("/legal/$slug")({
   component: LegalPage,
   head: ({ params }) => {
     const policy = policyDefault(params.slug);
+    const title = policy ? `${policy.title} — Pipecove` : "Policy — Pipecove";
+    const description = policy?.summary ?? "Pipecove policies for workspaces, messaging, and partners.";
     return {
       meta: [
-        { title: policy ? `${policy.title} — Pipecove` : "Policy — Pipecove" },
-        { name: "description", content: policy?.summary ?? "Pipecove policies." },
+        { title },
+        { name: "description", content: description },
+        { name: "robots", content: "index, follow, max-image-preview:large" },
       ],
+      links: [{ rel: "canonical", href: canonical(`/legal/${params.slug}`) }],
     };
   },
 });
@@ -19,9 +25,28 @@ export const Route = createFileRoute("/legal/$slug")({
 function LegalPage() {
   const { slug } = Route.useParams();
   const policy = policyDefault(slug);
+  const schema = policy
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            name: policy.title,
+            description: policy.summary,
+            url: `${SITE_ORIGIN}/legal/${policy.slug}`,
+            dateModified: "2026-10-01",
+          },
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: policy.title, path: `/legal/${policy.slug}` },
+          ]),
+        ],
+      }
+    : null;
 
   return (
     <Shell>
+      {schema ? <JsonLd data={schema} /> : null}
       <article className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20">
         {policy ? (
           <>
@@ -39,19 +64,21 @@ function LegalPage() {
             <p className="mt-4 text-mist">Choose one of the published documents.</p>
           </>
         )}
-        <ul className="mt-12 flex flex-wrap gap-x-4 gap-y-2 border-t border-line pt-6 text-sm">
-          {POLICY_DEFAULTS.map((item) => (
-            <li key={item.slug}>
-              <Link
-                to="/legal/$slug"
-                params={{ slug: item.slug }}
-                className={item.slug === slug ? "font-semibold text-foreground" : "text-primary"}
-              >
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <nav className="mt-12 border-t border-line pt-6" aria-label="All policies">
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            {POLICY_DEFAULTS.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  to="/legal/$slug"
+                  params={{ slug: item.slug }}
+                  className={item.slug === slug ? "font-semibold text-foreground" : "text-primary"}
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </article>
     </Shell>
   );

@@ -130,6 +130,7 @@ function ContactPanel() {
   const events = [
     ["Email opened", "Intro for the Harbor listing"],
     ["SMS sent", "Confirming Thursday at 2"],
+    ["Instagram", "Asked for the quiet listing, not the open home"],
     ["Stage", "New → Appointment"],
     ["Note", "Wants a quiet close. No open house."],
   ];
@@ -176,7 +177,7 @@ function InboxPanel() {
     <div className="overflow-hidden rounded-lg border border-line bg-card">
       <div className="border-b border-line px-4 py-3">
         <p className="text-sm font-semibold">14 Harbor Street</p>
-        <p className="text-xs text-mist">Maya Ellison · email · on the contact</p>
+        <p className="text-xs text-mist">Maya Ellison · Instagram DM · on the contact</p>
       </div>
       <div className="grid gap-3 p-4">
         {messages.map((message) => (

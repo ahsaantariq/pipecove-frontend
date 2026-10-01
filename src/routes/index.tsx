@@ -2,25 +2,71 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Desk } from "@/components/site/desk";
 import { Band, Shell } from "@/components/site/shell";
 import { DAY, MODULES, PLANS } from "@/content/product";
-import { APP } from "@/lib/site";
+import { JsonLd, breadcrumbLd, canonical } from "@/lib/seo";
+import { APP, SITE_ORIGIN } from "@/lib/site";
+
+const TITLE = "Pipecove CRM — email, SMS, calls, WhatsApp, and Instagram in one desk";
+const DESCRIPTION =
+  "Pipecove is a CRM for follow-up: contacts, pipeline, email, SMS, calls, WhatsApp, Messenger, and Instagram DMs. Numbers in Australia and the UK. Free, Solo, Growth, and Agency.";
 
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "Pipecove — the client desk" },
-      {
-        name: "description",
-        content:
-          "Contacts, pipelines, email, SMS, calls, calendar, and automations in one workspace. Sign in at app.pipecove.com.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
+    links: [{ rel: "canonical", href: canonical("/") }],
   }),
 });
 
 function Home() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_ORIGIN}/#org`,
+        name: "Pipecove",
+        url: `${SITE_ORIGIN}/`,
+        logo: `${SITE_ORIGIN}/favicon.svg`,
+        email: "support@pipecove.com",
+        description: DESCRIPTION,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_ORIGIN}/#website`,
+        url: `${SITE_ORIGIN}/`,
+        name: "Pipecove",
+        publisher: { "@id": `${SITE_ORIGIN}/#org` },
+        inLanguage: "en",
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: "Pipecove",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: `${SITE_ORIGIN}/`,
+        description: DESCRIPTION,
+        offers: PLANS.map((plan) => ({
+          "@type": "Offer",
+          name: plan.name,
+          price: plan.amount,
+          priceCurrency: "USD",
+          url: `${SITE_ORIGIN}/pricing`,
+          description: plan.summary,
+        })),
+      },
+      breadcrumbLd([
+        { name: "Home", path: "/" },
+      ]),
+    ],
+  };
+
   return (
     <Shell>
+      <JsonLd data={schema} />
       <section className="border-b border-line">
         <div className="mx-auto grid max-w-7xl items-end gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-24">
           <div>
@@ -29,8 +75,8 @@ function Home() {
               The whole client relationship, <em>on one desk.</em>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-pretty text-mist">
-              Contacts, deals, email, SMS, calls, and the next appointment. Pipecove is the workspace.
-              This site is the overview. Sign in, signup, and the desk itself open at app.pipecove.com.
+              Contacts, deals, email, SMS, calls, WhatsApp, and the Facebook and Instagram threads your clients already use.
+              Pipecove is the workspace. Phone numbers for SMS, calling, and WhatsApp are sold for Australia and the United Kingdom.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href={APP.login} className="btn btn-primary">
@@ -41,8 +87,8 @@ function Home() {
               </a>
             </div>
             <p className="mt-4 max-w-md text-sm text-mist">
-              New teams choose Sign up on that screen. Starter includes a 14-day trial. SMS, calls, and numbers
-              are prepaid, separate from the subscription.
+              Free stays free. Solo is $19, Growth is $49, Agency is $99, billed monthly in US dollars. SMS, calls, WhatsApp,
+              and numbers are prepaid from a wallet, separate from the plan.
             </p>
           </div>
           <Desk />
@@ -56,8 +102,7 @@ function Home() {
             <h2 className="mt-3 font-display text-4xl sm:text-5xl">Eight places. One record at the center.</h2>
           </div>
           <p className="max-w-xl text-lg text-mist">
-            Nothing below is a slogan for a feature that is not in the product. This is the sidebar your team
-            opens after sign-in.
+            Nothing below is a slogan for a feature that is not in the product. This is the sidebar your team opens after sign-in.
           </p>
         </div>
         <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
@@ -99,9 +144,9 @@ function Home() {
       <Band>
         <div className="grid gap-6 lg:grid-cols-3">
           {[
-            ["The record is the center", "Notes, email, SMS, calls, and stage changes sit on the same person. Search from anywhere. Open a contact without losing the list."],
-            ["Agents get an edge, not the whole company", "Admins invite people and turn features on one by one. An assigned lead stays with that agent. Deal lists hide email and phone unless Contacts is on."],
-            ["The wallet is visible before you send", "The subscription covers the CRM. SMS, voice minutes, and number rental spend a prepaid balance. Rates are the ones shown in the workspace."],
+            ["The record is the center", "Notes, email, SMS, calls, WhatsApp, Messenger, and Instagram sit on the same person. Search from anywhere. Open a contact without losing the list."],
+            ["Agents get an edge, not the whole company", "On Growth and Agency, admins invite people and turn features on one by one. An assigned lead stays with that agent. Deal lists hide email and phone unless Contacts is on."],
+            ["The wallet is visible before you send", "The subscription covers the CRM. SMS, voice minutes, WhatsApp usage, and number rental spend a prepaid balance. Rates are the ones shown in the workspace."],
           ].map(([title, body]) => (
             <article key={title} className="rounded-2xl border border-line bg-card p-6">
               <h3 className="font-display text-3xl">{title}</h3>
@@ -115,13 +160,13 @@ function Home() {
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-xl">
             <p className="kicker">Pricing</p>
-            <h2 className="mt-3 font-display text-4xl sm:text-5xl">Pay for the desk. Prepay the messages.</h2>
+            <h2 className="mt-3 font-display text-4xl sm:text-5xl">Four plans. The phone is not hiding in the price.</h2>
           </div>
           <Link to="/pricing" className="btn btn-line">
             Compare every feature
           </Link>
         </div>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {PLANS.map((plan) => (
             <article
               key={plan.id}
@@ -133,22 +178,21 @@ function Home() {
             >
               <div className="flex items-center justify-between gap-3">
                 <h3 className="text-lg font-semibold">{plan.name}</h3>
-                {plan.trial ? (
-                  <span className="rounded-full bg-foam px-2 py-1 text-xs font-semibold text-primary">{plan.trial}</span>
+                {plan.badge ? (
+                  <span className="rounded-full bg-foam px-2 py-1 text-xs font-semibold text-primary">{plan.badge}</span>
                 ) : null}
               </div>
               <p className="mt-4 font-display text-5xl tabular-nums">{plan.price}</p>
-              <p className="text-sm text-mist">{plan.cadence}</p>
+              <p className="text-sm text-mist">{plan.cadence}, USD</p>
               <p className="mt-3 text-sm text-mist">{plan.summary}</p>
               <a href={APP.login} className={plan.id === "growth" ? "btn btn-signal mt-6" : "btn btn-line mt-6"}>
-                {plan.price === "$0" ? "Start free" : `Choose ${plan.name}`}
+                {plan.amount === 0 ? "Start free" : `Choose ${plan.name}`}
               </a>
             </article>
           ))}
         </div>
         <p className="mt-6 text-sm text-mist">
-          Published catalog: Starter $0, Growth $49 per month, Scale $99 per month. If checkout shows a different
-          price or an annual interval, that is the one that bills.
+          Prices exclude tax. Checkout in the app is what bills if a figure ever differs from this page.
         </p>
       </Band>
 
@@ -158,20 +202,24 @@ function Home() {
             <p className="kicker">Two addresses</p>
             <h2 className="mt-3 font-display text-4xl">Read it here. Run it on the app.</h2>
             <p className="mt-4 max-w-lg text-mist">
-              The sites are separate on purpose. Templates and this overview stay on pipecove.com. Login, signup,
-              the dashboard, and every workspace action stay on the app.
+              The sites are separate on purpose. Product, pricing, security, partners, and policies stay on pipecove.com.
+              Login, the dashboard, number purchases, and every workspace action stay on the app.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-line bg-card p-5">
               <p className="text-xs font-semibold tracking-wide text-mist uppercase">pipecove.com</p>
               <p className="mt-3 font-display text-2xl">The public site</p>
-              <p className="mt-2 text-sm leading-6 text-mist">Product, pricing, security, partners, and policies. Nothing here signs you into a workspace.</p>
+              <p className="mt-2 text-sm leading-6 text-mist">
+                What the plans include, which countries you can buy a number in, and the rules Meta and the carriers expect to see in public.
+              </p>
             </div>
             <div className="rounded-2xl bg-ink p-5 text-paper">
               <p className="text-xs font-semibold tracking-wide text-signal uppercase">app.pipecove.com</p>
               <p className="mt-3 font-display text-2xl">The workspace</p>
-              <p className="mt-2 text-sm leading-6 text-haze">Sign in, create a workspace, open the dashboard, or use the separate partner login.</p>
+              <p className="mt-2 text-sm leading-6 text-haze">
+                Sign in, create a workspace, open the dashboard, or use the separate partner login.
+              </p>
               <a href={APP.login} className="btn btn-signal mt-5">
                 Go to the app
               </a>

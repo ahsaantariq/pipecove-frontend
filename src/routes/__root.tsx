@@ -11,12 +11,9 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: APP_NAME },
+      { name: "description", content: "Pipecove is a CRM for follow-up: contacts, pipeline, email, SMS, calls, WhatsApp, and Facebook and Instagram messages. Phone numbers in Australia and the UK." },
       { name: "theme-color", content: "#10211D" },
-      {
-        name: "description",
-        content:
-          "Pipecove is the CRM desk for contacts, pipelines, email, SMS, calls, and follow-up. Sign in at app.pipecove.com.",
-      },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

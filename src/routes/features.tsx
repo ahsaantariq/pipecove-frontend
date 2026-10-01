@@ -1,29 +1,49 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Band, PageHero, Shell } from "@/components/site/shell";
 import { FEATURE_GROUPS } from "@/content/product";
-import { APP } from "@/lib/site";
+import { JsonLd, breadcrumbLd, canonical } from "@/lib/seo";
+import { APP, SITE_ORIGIN } from "@/lib/site";
+
+const TITLE = "Pipecove product — pipeline, inbox, WhatsApp, and Instagram DMs";
+const DESCRIPTION =
+  "What is actually in the Pipecove workspace: contacts, pipelines, email, SMS, calls, WhatsApp, Facebook Messenger, Instagram DMs, calendar, automations, and team access.";
 
 export const Route = createFileRoute("/features")({
   component: FeaturesPage,
   head: () => ({
     meta: [
-      { title: "Product — Pipecove" },
-      {
-        name: "description",
-        content:
-          "A full overview of the Pipecove workspace: contacts, pipelines, inbox, calendar, automations, custom objects, and team access.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
+    links: [{ rel: "canonical", href: canonical("/features") }],
   }),
 });
 
 function FeaturesPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        name: TITLE,
+        description: DESCRIPTION,
+        url: `${SITE_ORIGIN}/features`,
+      },
+      breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Product", path: "/features" },
+      ]),
+    ],
+  };
+
   return (
     <Shell>
+      <JsonLd data={schema} />
       <PageHero
         kicker="Product"
         title="Everything the workspace is for."
-        lede="Pipecove is a sales desk: people, deals, messages, and the calendar that follows them. The sections below match the product, not a roadmap."
+        lede="Pipecove is a sales desk: people, deals, and the messages that follow them — email on every plan, the phone on Solo, and WhatsApp, Messenger, and Instagram on Growth. The sections below match the product, not a roadmap."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={APP.login} className="btn btn-primary">
@@ -66,7 +86,7 @@ function FeaturesPage() {
           <div>
             <h2 className="font-display text-3xl">Wallet, not a surprise invoice</h2>
             <p className="mt-2 max-w-xl text-sm leading-6 text-haze">
-              The subscription covers the CRM. SMS, voice minutes, and number rental spend a prepaid balance you can see before you send.
+              The subscription covers the CRM. SMS, voice minutes, WhatsApp usage, and number rental spend a prepaid balance you can see before you send. Messenger and Instagram are included on Growth and Agency.
             </p>
           </div>
           <a href={APP.login} className="btn btn-signal">
